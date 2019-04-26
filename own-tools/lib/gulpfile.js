@@ -6,6 +6,7 @@ injectRequire();
 const merge2 = require('merge2');// 将多个流按顺序或并行合并为一个流 
 const { execSync } = require('child_process');
 
+//用于处理node的stream
 const through2 = require('through2');
 // const webpack = require('webpack');
 // const babel = require('gulp-babel');
@@ -26,7 +27,7 @@ const transformLess = require('./transformLess');
 // const selfPackage = require('../package.json');
 const getNpmArgs = require('./utils/get-npm-args');
 // const { cssInjection } = require('./utils/styleUtil');
-// const tsConfig = require('./getTSCommonConfig')();
+const tsConfig = require('./getTSCommonConfig')();
 // const replaceLib = require('./replaceLib');
 
 // const packageJson = require(getProjectPath('package.json'));
@@ -219,6 +220,8 @@ gulp.task(
 //   return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
 // }
 
+
+// 编译less 文件输出一份拷贝的less 和css 文件
 function compile(modules) {
   rimraf.sync(modules !== false ? libDir : esDir);
   gulp
@@ -237,7 +240,6 @@ function compile(modules) {
             .then(css => {
               file.contents = Buffer.from(css);
               file.path = file.path.replace(/\.less$/, '.css');
-              // 
               this.push(file);
               next();
             })
@@ -245,30 +247,31 @@ function compile(modules) {
               console.error(e);
             });
         } else {
-          next();
+            next();
         }
       })
     )
-    //css less 文件产出
-  .pipe(gulp.dest(modules === false ? esDir : libDir));
+  //css less 文件产出
+  .pipe(gulp.dest( modules === false ? esDir : libDir));
   const assets = gulp
     .src(['components/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
-  // let error = 0;
-  // const source = ['components/**/*.tsx', 'components/**/*.ts', 'typings/**/*.d.ts'];
+  let error = 0;
+  const source = ['components/**/*.tsx', 'components/**/*.ts', 'typings/**/*.d.ts'];
   // allow jsx file in components/xxx/
-  // if (tsConfig.allowJs) {
-  //   source.unshift('components/**/*.jsx');
-  // }
-  // const tsResult = gulp.src(source).pipe(
-  //   ts(tsConfig, {
-  //     error(e) {
-  //       tsDefaultReporter.error(e);
-  //       error = 1;
-  //     },
-  //     finish: tsDefaultReporter.finish,
-  //   })
-  // );
+  if (tsConfig.allowJs) {
+    source.unshift('components/**/*.jsx');
+  }
+  
+  const tsResult = gulp.src(source).pipe(
+    ts(tsConfig, {
+      error(e) {
+        tsDefaultReporter.error(e);
+        error = 1;
+      },
+      finish: tsDefaultReporter.finish,
+    })
+  );
 
   // function check() {
   //   if (error && !argv['ignore-error']) {
