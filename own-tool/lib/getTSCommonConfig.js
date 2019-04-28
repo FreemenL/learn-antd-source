@@ -9,7 +9,6 @@ module.exports = function() {
   if (fs.existsSync(getProjectPath('tsconfig.json'))) {
     my = require(getProjectPath('tsconfig.json'));
   }
-  console.log(my)
   return assign(
     {
       noUnusedParameters: true,

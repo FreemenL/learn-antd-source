@@ -6,6 +6,7 @@ function getProjectPath(...filePath) {
   return path.join(cwd, ...filePath);
 }
 
+// 自动检查该路径是否存在 
 function resolve(moduleName) {
   return require.resolve(moduleName);
 }

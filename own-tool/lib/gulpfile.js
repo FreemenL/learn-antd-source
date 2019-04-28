@@ -5,7 +5,6 @@ injectRequire();
 
 const merge2 = require('merge2');// 将多个流按顺序或并行合并为一个流 
 const { execSync } = require('child_process');
-
 //用于处理node的stream
 const through2 = require('through2');
 // const webpack = require('webpack');
@@ -178,47 +177,47 @@ gulp.task(
 //   })
 // );
 
-// function babelify(js, modules) {
-//   const babelConfig = getBabelCommonConfig(modules);
-//   delete babelConfig.cacheDirectory;
-//   if (modules === false) {
-//     babelConfig.plugins.push(replaceLib);
-//   } else {
-//     babelConfig.plugins.push(require.resolve('babel-plugin-add-module-exports'));
-//   }
-//   let stream = js.pipe(babel(babelConfig)).pipe(
-//     through2.obj(function z(file, encoding, next) {
-//       this.push(file.clone());
-//       if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
-//         const content = file.contents.toString(encoding);
-//         if (content.indexOf("'react-native'") !== -1) {
-//           // actually in antd-mobile@2.0, this case will never run,
-//           // since we both split style/index.mative.js style/index.js
-//           // but let us keep this check at here
-//           // in case some of our developer made a file name mistake ==
-//           next();
-//           return;
-//         }
+function babelify(js, modules) {
+  const babelConfig = getBabelCommonConfig(modules);
+  delete babelConfig.cacheDirectory;
+  if (modules === false) {
+    babelConfig.plugins.push(replaceLib);
+  } else {
+    babelConfig.plugins.push(require.resolve('babel-plugin-add-module-exports'));
+  }
+  let stream = js.pipe(babel(babelConfig)).pipe(
+    through2.obj(function z(file, encoding, next) {
+      this.push(file.clone());
+      if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
+        const content = file.contents.toString(encoding);
+        if (content.indexOf("'react-native'") !== -1) {
+          // actually in antd-mobile@2.0, this case will never run,
+          // since we both split style/index.mative.js style/index.js
+          // but let us keep this check at here
+          // in case some of our developer made a file name mistake ==
+          next();
+          return;
+        }
 
-//         file.contents = Buffer.from(cssInjection(content));
-//         file.path = file.path.replace(/index\.js/, 'css.js');
-//         this.push(file);
-//         next();
-//       } else {
-//         next();
-//       }
-//     })
-//   );
-//   if (modules === false) {
-//     stream = stream.pipe(
-//       stripCode({
-//         start_comment: '@remove-on-es-build-begin',
-//         end_comment: '@remove-on-es-build-end',
-//       })
-//     );
-//   }
-//   return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
-// }
+        file.contents = Buffer.from(cssInjection(content));
+        file.path = file.path.replace(/index\.js/, 'css.js');
+        this.push(file);
+        next();
+      } else {
+        next();
+      }
+    })
+  );
+  if (modules === false) {
+    stream = stream.pipe(
+      stripCode({
+        start_comment: '@remove-on-es-build-begin',
+        end_comment: '@remove-on-es-build-end',
+      })
+    );
+  }
+  return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
+}
 
 
 // 编译less 文件输出一份拷贝的less 和css 文件
@@ -259,28 +258,32 @@ function compile(modules) {
   let error = 0;
   const source = ['components/**/*.tsx', 'components/**/*.ts', 'typings/**/*.d.ts'];
   // allow jsx file in components/xxx/
-  
   // if (tsConfig.allowJs) {
   //   source.unshift('components/**/*.jsx');
   // }
-  // console.log(tsDefaultReporter.finish);
+  const tsResult = gulp.src(source).pipe(
+    ts(tsConfig, {
+      error(e) {
+        tsDefaultReporter.error(e);
+        error = 1;
+      },
+      finish:tsDefaultReporter.finish,
+    })
+  );
 
-  // const tsResult = gulp.src(source).pipe(
-  //   ts(tsConfig)
-  // );
+  function check() {
+    if (error && !argv['ignore-error']) {
+      process.exit(1);
+    }
+  }
 
-
-  // function check() {
-  //   if (error && !argv['ignore-error']) {
-  //     process.exit(1);
-  //   }
-  // }
-
-//  tsResult.on('finish', check);
-//  tsResult.on('end', check);
+  tsResult.on('finish', check);
+  tsResult.on('end', check);
+  // console.log(tsResult);
+  console.log(tsResult.js);
   // const tsFilesStream = babelify(tsResult.js, modules);
-  //tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
-  // return merge2([less, tsd, assets]);
+  // const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
+  return merge2([less, tsFilesStream, tsd, assets]);
 }
 
 // function publish(tagString, done) {
@@ -327,7 +330,7 @@ function pub(done) {
 
 gulp.task('compile-with-es', done => {
   console.log('[Parallel] Compile to es...');
-  compile(false)//.on('finish', done);
+  compile(false).on('finish', done);
 });
 
 gulp.task('compile-with-lib', done => {
