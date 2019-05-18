@@ -1,0 +1,39 @@
+Arguments: 
+  /usr/local/Cellar/node@8/8.16.0/bin/node /usr/local/bin/yarn add --dev babel-jest @babel/core @babel/preset-env
+
+PATH: 
+  /usr/local/opt/node@8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/admin/opt/gradle-5.2/bin:/usr/local/opt/node@8/bin
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  8.16.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EINVAL: invalid argument, unlink '/Users/admin/Desktop/jest/node_modules/acorn-globals/node_modules/acorn'
+
+npm manifest: 
+  {
+    "name": "test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sum.test.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "jest": "^24.8.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

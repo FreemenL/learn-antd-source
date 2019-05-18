@@ -1,0 +1,6 @@
+//测试对象是否相等 
+test('object assignment', () => {
+    const data = { one: 1 };
+    data['two'] = 2;
+    expect(data).toEqual({one: 1, two: 2});
+});
