@@ -3,10 +3,13 @@ const path = require("path");
 const glob = require("glob");
 const postcss = require("postcss");
 const less = require("less");
+// 把多个less 文件合并为一个
 const bundle = require("less-bundle-promise");
+
 const hash = require("hash.js");
+// 从npm impirt less
 const NpmImportPlugin = require('less-plugin-npm-import');
-const colorsOnly = require('postcss-colors-only');
+// const colorsOnly = require('postcss-colors-only');
 
 const options = {
   withoutGrey: true, // set to true to remove rules that only have grey colors
@@ -16,6 +19,7 @@ const options = {
 let hashCache = "";
 let cssCache = "";
 
+// 生成随机色
 function randomColor() {
   return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 }
@@ -37,6 +41,7 @@ function getColor(varName, mappings) {
     return color;
   }
 }
+
 /*
   Read following files and generate color variables and color codes mapping
     - Ant design color.less, themes/default.less
@@ -54,6 +59,7 @@ function getColor(varName, mappings) {
     ....
   }
 */
+
 function generateColorMap(content) {
   return content
     .split("\n")
@@ -102,6 +108,7 @@ function generateColorMap(content) {
 */
 const reducePlugin = postcss.plugin("reducePlugin", () => {
   const cleanRule = rule => {
+    // 清除掉.main-color .palatte- 开口的css 语句
     if (rule.selector.startsWith(".main-color .palatte-")) {
       rule.remove();
       return;
@@ -129,7 +136,7 @@ const reducePlugin = postcss.plugin("reducePlugin", () => {
     });
 
     css.walkRules(cleanRule);
-
+    //遍历容器的后代节点，为每个注释节点调用回调 
     css.walkComments(c => c.remove());
   };
 });
@@ -148,6 +155,7 @@ function getMatches(string, regex) {
 /*
   This function takes less input as string and compiles into css.
 */
+// 编译less文件输出css 
 function render(text, paths) {
   return less.render.call(less, text, {
     paths: paths,
@@ -163,9 +171,7 @@ function render(text, paths) {
     @primary-color : #1890ff;
     @heading-color : #fa8c16;
     @text-color : #cccccc;
-  
     to
-
     {
       '@primary-color' : '#1890ff',
       '@heading-color' : '#fa8c16',
@@ -173,6 +179,7 @@ function render(text, paths) {
     }
 
 */
+// 转换 less文件中的less变量
 function getLessVars(filtPath) {
   const sheet = fs.readFileSync(filtPath).toString();
   const lessVars = {};
@@ -198,14 +205,7 @@ function getShade(varName) {
   return 'color(~`colorPalette("@{' + className.replace('@', '') + '}", ' + number + ")`)";
 }
 
-/*
-  This function takes color string as input and return true if string is a valid color otherwise returns false.
-  e.g.
-  isValidColor('#ffffff'); //true
-  isValidColor('#fff'); //true 
-  isValidColor('rgba(0, 0, 0, 0.5)'); //true
-  isValidColor('20px'); //false
-*/
+//验证字符串是否为颜色值
 function isValidColor(color) {
   if (!color || color.match(/px/g)) return false;
   if (color.match(/colorPalette|fade/g)) return true;
@@ -244,17 +244,19 @@ function getCssModulesStyles(stylesDir, antdStylesDir) {
     });
 }
 
-/*
-  This is main function which call all other functions to generate color.less file which contins all color
-  related css rules based on Ant Design styles and your own custom styles
-  By default color.less will be generated in /public directory
-*/
+// 根据定义的主题变量生成对应的 less 文件 合并成一个文件输出
 function generateTheme({
+  //包目录
   antDir,
+  //样式文件目录
   antdStylesDir,
+  // 输出样式的目录
   stylesDir,
+  // 主入口样式文件
   mainLessFile,
+  //自定义主题样式文件,
   varFile,
+ // 写出样式文件的路径
   outputFilePath,
   cssModules = false,
   themeVariables = ['@primary-color']
@@ -274,7 +276,9 @@ function generateTheme({
     } else {
       antdPath = path.join(antDir, 'lib');
     }
+    // 项目入口文件 
     const entry = path.join(antdPath, './style/index.less');
+    // 所有less文件
     const styles = glob.sync(path.join(antdPath, './*/style/index.less'));
 
     /*
@@ -284,17 +288,22 @@ function generateTheme({
       - mainLessFile - less main file which imports all other custom styles
       - varFile - variable file containing ant design specific and your own custom variables
     */
+    //自定义主题样式文件
     varFile = varFile || path.join(antdPath, "./style/themes/default.less");
 
+    // 读取主文件
     let content = fs.readFileSync(entry).toString();
     content += "\n";
+    // 引入 所有样式文件
     styles.forEach(style => {
       content += `@import "${style}";\n`;
     });
+    // 引入 所有样式文件
     if (mainLessFile) {
       const customStyles = fs.readFileSync(mainLessFile).toString();
       content += `\n${customStyles}`;
     }
+    //如果文件内容没变的话 
     const hashCode = hash.sha256().update(content).digest('hex');
     if(hashCode === hashCache){
       resolve(cssCache);
@@ -307,15 +316,17 @@ function generateTheme({
       path.join(antdPath, "./style"),
       stylesDir
     ];
-
+    //处理文件中颜色相关的变量 输出css
     return bundle({
       src: varFile
     })
       .then(colorsLess => {
-        const mappings = Object.assign(generateColorMap(colorsLess), generateColorMap(mainLessFile));
-        return [mappings, colorsLess];
+        // 解析文件中的颜色变量
+        const mappings = Object.assign(generateColorMap(colorsLess),generateColorMap(mainLessFile));
+        return [ mappings, colorsLess ];
       })
-      .then(([mappings, colorsLess]) => {
+      // 输出css
+      .then(([ mappings, colorsLess]) => {
         let css = "";
         themeVars = themeVars.filter(name => name in mappings);
         themeVars.forEach(varName => {
@@ -329,7 +340,7 @@ function generateTheme({
             css = `.${name.replace("@", "")} { color: ${getShade(name)}; }\n ${css}`;
           });
         });
-
+        
         css = `${colorsLess}\n${css}`;
         return render(css, lessPaths).then(({ css }) => [
           css,
@@ -404,6 +415,7 @@ module.exports = {
   generateTheme,
   isValidColor,
   getLessVars,
+  //生成随机色
   randomColor,
   renderLessContent: render
 };

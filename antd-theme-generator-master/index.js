@@ -7,7 +7,7 @@ const less = require("less");
 const bundle = require("less-bundle-promise");
 
 const hash = require("hash.js");
-
+// 从npm impirt less
 const NpmImportPlugin = require('less-plugin-npm-import');
 // const colorsOnly = require('postcss-colors-only');
 
@@ -108,6 +108,7 @@ function generateColorMap(content) {
 */
 const reducePlugin = postcss.plugin("reducePlugin", () => {
   const cleanRule = rule => {
+    // 清除掉.main-color .palatte- 开口的css 语句
     if (rule.selector.startsWith(".main-color .palatte-")) {
       rule.remove();
       return;
@@ -135,7 +136,7 @@ const reducePlugin = postcss.plugin("reducePlugin", () => {
     });
 
     css.walkRules(cleanRule);
-
+    //遍历容器的后代节点，为每个注释节点调用回调 
     css.walkComments(c => c.remove());
   };
 });
@@ -154,7 +155,7 @@ function getMatches(string, regex) {
 /*
   This function takes less input as string and compiles into css.
 */
-// 编译less文件输出 css 
+// 编译less文件输出css 
 function render(text, paths) {
   return less.render.call(less, text, {
     paths: paths,
@@ -170,9 +171,7 @@ function render(text, paths) {
     @primary-color : #1890ff;
     @heading-color : #fa8c16;
     @text-color : #cccccc;
-  
     to
-
     {
       '@primary-color' : '#1890ff',
       '@heading-color' : '#fa8c16',
@@ -308,7 +307,7 @@ function generateTheme({
       const customStyles = fs.readFileSync(mainLessFile).toString();
       content += `\n${customStyles}`;
     }
-    // 如果文件内容没变的话 
+    //如果文件内容没变的话 
     const hashCode = hash.sha256().update(content).digest('hex');
     if(hashCode === hashCache){
       resolve(cssCache);
@@ -321,17 +320,17 @@ function generateTheme({
       path.join(antdPath, "./style"),
       stylesDir
     ];
-
+    //处理文件中颜色相关的变量 输出css
     return bundle({
       src: varFile
     })
       .then(colorsLess => {
         // 解析文件中的颜色变量
-        const mappings = Object.assign(generateColorMap(colorsLess), generateColorMap(mainLessFile));
-        return [mappings, colorsLess];
+        const mappings = Object.assign(generateColorMap(colorsLess),generateColorMap(mainLessFile));
+        return [ mappings, colorsLess ];
       })
-
-      .then(([mappings, colorsLess]) => {
+      // 输出css
+      .then(([ mappings, colorsLess]) => {
         let css = "";
         themeVars = themeVars.filter(name => name in mappings);
         themeVars.forEach(varName => {
@@ -345,7 +344,7 @@ function generateTheme({
             css = `.${name.replace("@", "")} { color: ${getShade(name)}; }\n ${css}`;
           });
         });
-
+        
         css = `${colorsLess}\n${css}`;
         return render(css, lessPaths).then(({ css }) => [
           css,

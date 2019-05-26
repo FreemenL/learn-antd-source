@@ -6,7 +6,7 @@ const options = {
   antDir: path.join(__dirname, './node_modules/antd'),
   varFile: path.join(__dirname, './src/styles/vars.less'),
   mainLessFile: path.join(__dirname, './src/styles/main.less'),
-  themeVariables: [
+  themeVariables:[
     '@primary-color',
     '@secondary-color',
     '@text-color',
@@ -19,6 +19,7 @@ const options = {
   // indexFileName: 'index.html',
   outputFilePath: path.join(__dirname, './public/color.less'),
 }
+// load-runner
 
 generateTheme(options).then(less => {
   console.log('Theme generated successfully');

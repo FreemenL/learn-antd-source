@@ -1,35 +1,43 @@
 const postcss = require('postcss');
 const less = require("less");
 
-// postcss.plugin('postcss-test-plugin', function (opts) {
-//     opts = opts || {};
-//     // Work with options here
-//     return function (root, result) {
-//         // Transform CSS AST here
-//     };
-// });
+// 要转换的语法
+const parseProps = {
+    ta:'text-align'
+}
 
+// 策略模式转换语法
+const parseRules = (rule,props)=> {
+    if(parseProps[props]){
+        rule['nodes'][0]['prop'] = parseProps[props];
+    }
+}
+
+//定义插件
 const postcssPlugin = postcss.plugin("postcssPlugin", (opts) => {
+    // 在这里配置你的选项
     opts = opts || {};
-    return css => {
-        console.log(css);
-        // css.walkAtRules(atRule => {
-        //     atRule.remove();
-        // });
-        // css.walkRules(cleanRule);
-        // css.walkComments(c => c.remove());
+    return root => {
+        // root.walkRules 遍历容器的后代节点，为每个规则节点调用回调，如果传递过滤器，迭代将仅发生在具有匹配选择器的规则上。
+        root.walkRules((rule)=>{
+            parseRules(rule,rule['nodes'][0]['prop'])
+        }); 
+        root.walkComments(c => c.remove())
     };
 });
 
 
 postcss([postcssPlugin])
-.process(`a{color:#fff}`, {
+.process(`
+    /* 这里是注释 */
+    a{
+        ta : center;
+    }`, {
     parser: less.parser,
     from: './style.less',
-    to:   'app.css'
-    // map: { inline: true },
 }).then((css)=>{
-    console.log(css);
+    // 转换后的内容
+    console.log(css.root);
 })
 
 

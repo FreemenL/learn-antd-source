@@ -13,6 +13,7 @@ const NpmImportPlugin = require('less-plugin-npm-import');
 
 // 编译less文件输出 css 
 function render(text, paths) {
+    console.log(paths);
     return less.render.call(less, text, {
       paths: paths,
       javascriptEnabled: true,
@@ -45,16 +46,18 @@ bundle({
     });
     
     css = `${colorsLess}\n${css}`;
-    // console.log(css);
+    console.log(css);
     
-    render(css, [path.join(__dirname,'styles')]);
+    render(css, [path.join(__dirname,'./lib')]).then((css)=>{
+      
+    });
   })
 
 
   function getShade(varName) {
-    let [, className, number] = varName.match(/(.*)-(\d)/);
-    if (/primary-\d/.test(varName)) className = '@primary-color';
-    return 'color(~`colorPalette("@{' + className.replace('@', '') + '}", ' + number + ")`)";
+    // let [, className, number] = varName.match(/(.*)-(\d)/);
+    // if (/primary-\d/.test(varName)) className = '@primary-color';
+    // return 'color(~`colorPalette("@{' + className.replace('@', '') + '}", ' + number + ")`)";
   }
 
 // 验证字符串是否为颜色值

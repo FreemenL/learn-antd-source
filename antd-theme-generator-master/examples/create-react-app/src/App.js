@@ -77,6 +77,7 @@ class App extends Component {
     vars[varName] = color;
     this.setState({ vars });
   };
+
   handleColorChange = (varname, color) => {
     const { vars } = this.state;
     if (varname) vars[varname] = color;
