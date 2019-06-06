@@ -1,0 +1,11 @@
+module.exports = {
+    'basic': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/basic.md'),
+    'block': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/block.md'),
+    'button-group': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/button-group.md'),
+    'disabled': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/disabled.md'),
+    'ghost': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/ghost.md'),
+    'icon': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/icon.md'),
+    'loading': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/loading.md'),
+    'multiple': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/multiple.md'),
+    'size': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/button/demo/size.md'),
+}

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
+console.log("restss")
+// const program = require('commander');
+// const BiSheng = require('../lib');
 
-const program = require('commander');
-const BiSheng = require('../lib');
+// program
+//   .option('-c, --config <path>', 'set config path. defaults to ./bisheng.config.js')
+//   .parse(process.argv);
 
-program
-  .option('-c, --config <path>', 'set config path. defaults to ./bisheng.config.js')
-  .parse(process.argv);
-
-BiSheng.start(program);
+// BiSheng.start(program);

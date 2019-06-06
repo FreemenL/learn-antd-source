@@ -1,0 +1,8 @@
+module.exports = {
+    'arrow-point-at-center': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/arrow-point-at-center.md'),
+    'basic': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/basic.md'),
+    'control': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/control.md'),
+    'hover-with-click': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/hover-with-click.md'),
+    'placement': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/placement.md'),
+    'triggerType': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/popover/demo/triggerType.md'),
+}

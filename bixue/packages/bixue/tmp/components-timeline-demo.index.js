@@ -1,0 +1,8 @@
+module.exports = {
+    'alternate': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/alternate.md'),
+    'basic': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/basic.md'),
+    'color': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/color.md'),
+    'custom': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/custom.md'),
+    'pending': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/pending.md'),
+    'right': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/timeline/demo/right.md'),
+}

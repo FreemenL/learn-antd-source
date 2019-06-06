@@ -1,0 +1,7 @@
+module.exports = {
+    'duration': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/message/demo/duration.md'),
+    'info': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/message/demo/info.md'),
+    'loading': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/message/demo/loading.md'),
+    'other': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/message/demo/other.md'),
+    'thenable': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/message/demo/thenable.md'),
+}

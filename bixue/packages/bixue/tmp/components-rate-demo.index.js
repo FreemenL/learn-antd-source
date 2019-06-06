@@ -1,0 +1,8 @@
+module.exports = {
+    'basic': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/basic.md'),
+    'character': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/character.md'),
+    'clear': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/clear.md'),
+    'disabled': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/disabled.md'),
+    'half': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/half.md'),
+    'text': require('/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/bixue/packages/bixue/lib/loaders/source-loader!/Users/jiayali/Desktop/learn-antd-source/learn-antd-source/ant-design-3.16.1/components/rate/demo/text.md'),
+}

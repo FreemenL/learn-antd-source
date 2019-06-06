@@ -3,7 +3,7 @@
   "version": "1.2.4",
   "description": "Transform Markdown(and other static files with transformers) into a SPA website using React.",
   "bin": {
-    "bisheng": "./bin/bisheng"
+    "bishengt": "./bin/bisheng"
   },
   "files": [
     "lib",

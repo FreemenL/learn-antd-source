@@ -108,7 +108,7 @@ exports.start = function start(program) {
   const webpackConfig = updateWebpackConfig(getWebpackCommonConfig(), 'start');
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
   const serverOptions = {
-    quiet: true,
+    quiet:true,
     hot: true,
     ...bishengConfig.devServerConfig,
     contentBase: path.join(process.cwd(), bishengConfig.output),

@@ -1,5 +1,5 @@
 let isInitialized = false;
-exports.initialize = function (context) {
+exports.initialize = function(context) {
   if (isInitialized) {
     console.error('`context` had been initialized');
     return;
@@ -11,3 +11,4 @@ exports.initialize = function (context) {
 exports.turnOnSSRFlag = function () {
   exports.isSSR = true;
 };
+

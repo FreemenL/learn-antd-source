@@ -90,7 +90,6 @@ module.exports = {
   },
   webpackConfig(config) {
     // eslint-disable-next-line
-    console.log(config);
     
     config.resolve.alias = {
       'antd/lib': path.join(process.cwd(), 'components'),

@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const BiXue = require('../lib');
+
+program
+  .option('-c, --config <path>', 'set config path. defaults to ./bisheng.config.js')
+  .parse(process.argv);
+
+console.log(__dirname);
+BiXue.start(program);
