@@ -130,9 +130,11 @@ function getWebpackCommonConfig() {
     },
     plugins: [new _miniCssExtractPlugin["default"]({
       filename: cssFileName
-    }), new _caseSensitivePathsWebpackPlugin["default"](), new _webpackbar["default"]({
-      name: '🚚  BiXue',
-      color: '#2f54eb'
-    }), new _friendlyErrorsWebpackPlugin["default"](), new _CleanUpStatsPlugin["default"]()]
+    }), new _caseSensitivePathsWebpackPlugin["default"](), 
+      // new _webpackbar["default"]({
+      //   name: '🚚  BiXue',
+      //   color: '#2f54eb'
+      // }),
+     new _friendlyErrorsWebpackPlugin["default"](), new _CleanUpStatsPlugin["default"]()]
   };
 }

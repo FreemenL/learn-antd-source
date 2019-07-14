@@ -33,7 +33,7 @@ async function defaultCollector(nextProps) {
   return nextProps;
 }
 
-module.exports = function getRoutes(data) {
+module.exports = function getRoutes (data) {
   function templateWrapper(template, dataPath = '') {
     const Template = require(`{{ themePath }}/template${template.replace(/^\.\/template/, '')}`);
 
@@ -52,6 +52,8 @@ module.exports = function getRoutes(data) {
         pageData,
         utils,
       };
+      console.log(dynamicPropsKey);
+      // 用高阶组件的方式为 组件 dynamicPropsKey 赋值
       collector(nextProps)
         .then((collectedValue) => {
           try {
@@ -67,7 +69,7 @@ module.exports = function getRoutes(data) {
         });
     };
   }
-
+  //此处的themeRoutes是
   const themeRoutes = JSON.parse('{{ themeRoutes | safe }}');
   const routes = Array.isArray(themeRoutes) ? themeRoutes : [themeRoutes];
 
@@ -84,6 +86,7 @@ module.exports = function getRoutes(data) {
       },
       component: undefined,
       getComponent: templateWrapper(route.component, route.dataPath || route.path),
+      //默认路由
       indexRoute: route.indexRoute && Object.assign({}, route.indexRoute, {
         component: undefined,
         getComponent: templateWrapper(
@@ -100,6 +103,5 @@ module.exports = function getRoutes(data) {
     path: '*',
     getComponents: templateWrapper('./template/NotFound'),
   });
-
   return processedRoutes;
 };

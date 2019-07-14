@@ -14,6 +14,7 @@ title:
 `block` property will make the button fit to its parent width.
 
 ````jsx
+
 import { Button } from 'antd';
 
 ReactDOM.render(
@@ -25,4 +26,5 @@ ReactDOM.render(
   </div>,
   mountNode
 );
+
 ````

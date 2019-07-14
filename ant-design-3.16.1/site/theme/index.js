@@ -10,7 +10,7 @@ function pickerGenerator(module) {
   return markdownData => {
     const { filename } = markdownData.meta;
     if (tester.test(filename) && !/\/demo$/.test(path.dirname(filename))) {
-      return {
+      return { 
         meta: markdownData.meta,
       };
     }
@@ -54,6 +54,8 @@ module.exports = {
     'bisheng-plugin-antd?injectProvider',
     'bisheng-plugin-react?lang=__react',
   ],
+
+  // 通过 bisheng 中的 routes.nunjucks.jsx 中读取
   routes: {
     path: '/',
     component: './template/Layout/index',

@@ -17,10 +17,11 @@ if (
 
 import React from 'react';
 
-if (process.env.NODE_ENV !== 'production') {
-  const { whyDidYouUpdate } = require('why-did-you-update');
-  whyDidYouUpdate(React);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const { whyDidYouUpdate } = require('why-did-you-update');
+//   whyDidYouUpdate(React);
+// }
+
 export { default as Affix } from './affix';
 
 export { default as Anchor } from './anchor';

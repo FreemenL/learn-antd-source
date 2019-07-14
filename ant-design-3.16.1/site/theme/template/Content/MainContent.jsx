@@ -251,7 +251,7 @@ export default class MainContent extends Component {
     return this.flattenMenu((menu.props && menu.props.children) || menu.children);
   }
 
-  render() {
+  render(){
     const { props } = this;
     const { isMobile } = this.context;
     const { openKeys } = this.state;

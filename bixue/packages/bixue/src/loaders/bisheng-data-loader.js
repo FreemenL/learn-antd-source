@@ -11,7 +11,6 @@ module.exports = function bishengDataLoader(/* content */) {
   }
 
   const { bishengConfig, themeConfig } = context;
-
   const markdown = sourceData.generate(bishengConfig.source, bishengConfig.transformers);
   const browserPlugins = resolvePlugins(themeConfig.plugins, 'browser');
   const pluginsString = browserPlugins

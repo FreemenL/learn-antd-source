@@ -178,11 +178,11 @@ export default class Demo extends React.Component {
         },
         'index.js': {
           content: `
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './index.css';
-${sourceCode.replace('mountNode', "document.getElementById('container')")}
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import 'antd/dist/antd.css';
+            import './index.css';
+            ${sourceCode.replace('mountNode', "document.getElementById('container')")}
           `,
         },
         'index.html': {

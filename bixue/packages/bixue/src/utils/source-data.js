@@ -149,6 +149,7 @@ function stringify(params) {
   ])(nodeValue);
 }
 
+// 
 exports.generate = function generate(source, transformers = []) {
   if (source === null || source === undefined) {
     return {}; // For motion.ant.design, it doesn't need source sometimes.

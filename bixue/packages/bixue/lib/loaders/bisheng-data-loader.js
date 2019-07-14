@@ -21,6 +21,7 @@ module.exports = function bishengDataLoader()
 
   var bishengConfig = context.bishengConfig,
       themeConfig = context.themeConfig;
+      
   var markdown = sourceData.generate(bishengConfig.source, bishengConfig.transformers);
   var browserPlugins = resolvePlugins(themeConfig.plugins, 'browser');
   var pluginsString = browserPlugins.map(function (plugin) {

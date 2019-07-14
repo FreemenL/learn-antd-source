@@ -3,7 +3,7 @@ const appLocaleData = require('react-intl/locale-data/en');
 module.exports = {
   locale: 'en-US',
   data: appLocaleData,
-  messages: {
+  messages:{
     'app.header.search': 'Search...',
     'app.header.menu.home': 'Home',
     'app.header.menu.practice': 'Practice',

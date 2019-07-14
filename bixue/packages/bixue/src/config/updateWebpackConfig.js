@@ -4,6 +4,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import context from '../context';
 import getStyleLoadersConfig from './getStyleLoadersConfig';
 
+
+// 更新webpack配置  在这个文件中给配置文件抛出 webpack 以供修改;
 const bishengLib = path.join(__dirname, '..');
 const bishengLibLoaders = path.join(bishengLib, 'loaders');
 

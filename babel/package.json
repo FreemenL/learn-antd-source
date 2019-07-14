@@ -1,0 +1,24 @@
+{
+  "name": "babel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "traverse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel src --out-dir lib --presets=@babel/preset-env",
+    "start": "npm run babel && node lib/traverse.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/traverse": "^7.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/generator": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "escodegen": "^1.11.1"
+  }
+}

@@ -155,7 +155,7 @@ exports.start = function start(program) {
     host: 'localhost'
   });
 
-  console.log(webpackConfig); // 启用webpack的热加载
+  // console.log(webpackConfig); // 启用webpack的热加载
 
   WebpackDevServer.addDevServerEntrypoints(webpackConfig, serverOptions);
   var compiler = webpack(webpackConfig); // Ref: https://github.com/pigcan/blog/issues/6

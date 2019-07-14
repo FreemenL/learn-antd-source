@@ -7,8 +7,7 @@ exports.initialize = function (context) {
     console.error('`context` had been initialized');
     return;
   } // 通过这种方式直接给 exports 挂载属性
-
-
+  
   Object.assign(exports, context);
   isInitialized = true;
 };
